@@ -11,9 +11,9 @@
 
 | Nom Complet | Numéro d'étudiant | Classe | Rôle précis pour ce Hackathon |
 |-------------|-------------------|--------|-------------------------------|
-| *(à compléter)* | *(à compléter)* | *(à compléter)* | Lead AI / Minimax & Alpha-Beta |
-| *(à compléter)* | *(à compléter)* | *(à compléter)* | Frontend / UI-UX Designer |
-| *(à compléter)* | *(à compléter)* | *(à compléter)* | Backend Architect / DevOps |
+| ** | *(à compléter)* | *(à compléter)* | Lead AI / Minimax & Alpha-Beta |
+| *RALISAONA Fanomezana* | *21* | *IMTICIA 4* | Frontend / UI-UX Designer |
+| *RABEHARISAINA Mamy Fanojo* | *(à compléter)* | *(à compléter)* | Backend Architect / DevOps |
 
 ---
 
