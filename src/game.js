@@ -893,10 +893,3 @@ function switchScreen(id) {
    9. INIT
    ══════════════════════════════════════════════════════ */
 drawBoard();
-
-// window.startGame = startGame;
-// window.showDifficultyMenu = showDifficultyMenu;
-// window.goHome = goHome;
-// window.undoMove = undoMove;
-// window.restartGame = restartGame;
-// window.onCellClick = onCellClick;

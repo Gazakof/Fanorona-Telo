@@ -20,19 +20,16 @@
       <section class="mode-selector">
         <h2>Choisir le mode de jeu</h2>
         <div class="mode-cards">
-          <!-- <button class="mode-card" onclick="startGame('hvh')"> -->
           <button class="mode-card" id="btnSGhvh">
             <span class="mode-icon">👥</span>
             <strong>Humain vs Humain</strong>
             <small>Jouez à deux en local</small>
           </button>
-          <!-- <button class="mode-card" onclick="showDifficultyMenu()"> -->
           <button class="mode-card" id="btnDM">
             <span class="mode-icon">🧠</span>
             <strong>Humain vs IA</strong>
             <small>Affrontez l'IA</small>
           </button>
-          <!-- <button class="mode-card" onclick="startGame('ava')"> -->
           <button class="mode-card" id="btnSGava">
             <span class="mode-icon">🤖</span>
             <strong>IA vs IA</strong>
@@ -43,14 +40,8 @@
         <div id="difficulty-menu" class="difficulty-menu hidden">
           <h3>Niveau de difficulté</h3>
           <div class="diff-buttons">
-            <!-- <button class="diff-btn easy" onclick="startGame('hva', 'easy')"> -->
             <button class="diff-btn easy" id="btnSGFacile">Facile</button>
-            <!-- <button
-              class="diff-btn medium"
-              onclick="startGame('hva', 'medium')"
-            > -->
             <button class="diff-btn medium" id="btnSGMoyen">Moyen</button>
-            <!-- <button class="diff-btn hard" onclick="startGame('hva', 'hard')"> -->
             <button class="diff-btn hard" id="btnSGFDifficile">
               Difficile
             </button>
@@ -67,10 +58,8 @@
     <!-- ÉCRAN DE JEU -->
     <div id="screen-game" class="screen">
       <div class="game-topbar">
-        <!-- <button class="btn-back" onclick="goHome()"> -->
         <button class="btn-back" id="btnGoHome">← Menu</button>
         <div id="game-title" class="game-title">Fanoron-telo</div>
-        <!-- <button class="btn-undo" id="btn-undo" onclick="undoMove()" disabled> -->
         <button class="btn-undo" id="btn-undo" disabled>↩ Annuler</button>
       </div>
 
@@ -111,7 +100,6 @@
 
         <!-- Contrôles -->
         <div class="game-controls">
-          <!-- <button class="btn-restart" onclick="restartGame()"> -->
           <button class="btn-restart" id="btnRestart">⟳ Recommencer</button>
         </div>
 
@@ -158,6 +146,5 @@
     </div>
 
     <script type="module" src="src/main.js"></script>
-    <!-- <script type="module" src="/src/main.js"></script> -->
   </body>
 </html>

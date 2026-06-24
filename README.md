@@ -10,9 +10,10 @@
 | _RAKOTOARIVELO Anjaratiana Mendrika_  | _25_              | _IMTICIA 4_ | Lead AI / Minimax & Alpha-Beta         |
 | _RABEHARISAINA Mamy Fanojo_           | _22_              | _IMTICIA 4_ | Architecte du Moteur de Jeu            |
 | _ANDRIAMALALA RANJA Ken Andi_         | _13_              | _IMTICIA 4_ | Ingénieur Algorithmes et Optimisation  |
-| _ANDRIAMIHAJASON Ny Harentsoa Jorris_ | _01_              | _IMTICIA 4_ | Architecte Frontend                    |
 | _RALISAONA Fanomezana_                | _21_              | _IMTICIA 4_ | Designer UI/UX & Développeur Frontend  |
 | _RANDRIAMORASATA Ezra_                | _08_              | _IMTICIA 4_ | Responsable Intégration et Déploiement |
+| _RAKOTOMAMPIONONA FITAHIANA Herizo_   | _04_              | _IMTICIA 4_ | Architecte Frontend                    |
+| _ANDRIAMIHAJASON Ny Harentsoa Jorris_ | _01_              | _IMTICIA 4_ | Ingénieur d'Optimisation et Testeur    |
 
 ---
 
@@ -20,10 +21,10 @@
 
 ### Présentation globale
 
-**Fanoron-telo** est un jeu de société traditionnel malgache joué sur un plateau 3×3 à 9 intersections. Chaque joueur dispose de 3 pions. Le jeu se déroule en deux phases :
+**Fanoron-telo** est un jeu de société traditionnel malgache qui se joue sur une grille de 3×3 intersections, soit 9 points au total. Chaque joueur dispose de 3 pions. La partie se déroule en deux phases :
 
-- **Phase 1 — Placement :** Les joueurs posent leurs pions tour à tour. Si un joueur aligne ses 3 pions (ligne, colonne ou diagonale), il gagne immédiatement.
-- **Phase 2 — Mouvement :** Si aucun alignement n'est réalisé après la pose des 6 pions, les joueurs déplacent leurs pions vers une intersection adjacente libre en suivant les lignes du plateau. Le premier qui aligne ses 3 pions gagne.
+- **Phase 1 — Placement :** Les joueurs placent leurs pions à tour de rôle sur les intersections libres du plateau. Un joueur remporte immédiatement la partie s’il parvient à aligner ses trois pions (horizontalement, verticalement ou en diagonale).
+- **Phase 2 — Mouvement :** Si aucun joueur n’a gagné après la phase de placement, les joueurs déplacent à tour de rôle un de leurs pions vers une intersection adjacente libre, en suivant les lignes du plateau. Le premier joueur à réaliser un alignement de trois pions remporte la partie.
 
 ### Fonctionnalités implémentées
 
@@ -42,22 +43,40 @@
 
 ### Pile technologique
 
-- **Frontend :** HTML5, CSS3 (variables CSS, animations), JavaScript ES6+ natif (aucune dépendance)
+Le projet est entièrement développé en **JavaScript vanilla (ES Modules)** sans backend.
+
+- **Frontend :** HTML5, CSS3 (variables CSS, animations), Canvas API
 - **Rendu plateau :** Canvas API
+- **Logique du jeu :** JavaScript modulaire (game.js / main.js)
 - **IA :** Algorithme Minimax avec élagage Alpha-Beta, implémenté en JavaScript pur
-- **Hébergement :** Application statique, déployable sur GitHub Pages / Netlify sans serveur
+- **Rendu graphique :** Canvas 2D + overlay DOM pour les interactions
+
+### Hébergement
+
+Le projet est déployé sur Netlify :
+
+https://fanorona-telo.netlify.app/
 
 ---
 
 ## Section 3 : Guide d'Installation Rapide
 
+### 1. Cloner le projet
+
 ```bash
-git clone <url_du_depot>
-cd fanoron-telo
-open index.html   # ou double-cliquer sur index.html
+git clone https://github.com/Gazakof/Fanorona-Telo.git
+cd Fanorona-Telo
 ```
 
-> Aucune dépendance, aucun serveur requis. Le jeu fonctionne directement dans le navigateur.
+### 3. Lancer le projet en local
+
+Utiliser un serveur local (obligatoire pour les modules ES) :
+
+```bash
+npx vite
+```
+
+> Aucune dépendance externe n’est requise (projet en JavaScript vanilla).
 
 ---
 
@@ -69,7 +88,7 @@ L'équipe a exploité des assistants IA (Claude, GitHub Copilot) pour accélére
 - **Génération de tests rapides :** Génération de cas de test pour les 8 lignes gagnantes et les adjacences du graphe du plateau.
 - **CSS et design :** Suggestions de palette de couleurs (thème malgache : or #e8a838, rouge tanety #c1440e), génération des animations de pulsation et d'effets de survol.
 - **Débogage :** Identification des bugs de sélection en Phase 2 (cas où le joueur re-clique sur un autre de ses propres pions).
-- **Documentation :** Aide à la structuration du README et des commentaires JSDoc.
+- **Documentation :** Aide à la structuration du README.
 
 **Gain de temps estimé :** ~40% sur l'écriture boilerplate, ~30% sur le débogage des cas limites de l'IA.
 
@@ -178,6 +197,21 @@ if (entry && entry.depth >= depth) {
 
 ---
 
+### Opening Book (Bibliothèque d'ouvertures)
+
+Dictionnaire de coups prédéfinis pour les premières positions courantes, évitant l'appel à Minimax sur les états initiaux :
+
+```js
+const OPENING_BOOK = {
+  "000000000_1": [4], // plateau vide → toujours centre
+  "000010000_2": [0, 2, 6, 8], // humain a le centre → coin
+  "100000000_2": [4], // humain en coin → répondre centre
+  // ... 12 entrées au total
+};
+```
+
+---
+
 ### Iterative Deepening
 
 Au lieu d'aller directement à la profondeur maximale, l'IA lance Minimax pour depth=1, 2, 3… jusqu'à la limite de temps ou la profondeur max :
@@ -211,21 +245,6 @@ Pour maximiser l'efficacité de l'élagage Alpha-Beta, les coups sont triés ava
 | 10       | Placement au centre (case 4)         |
 | 5        | Placement dans un coin (0,2,6,8)     |
 | 2        | Placement sur un bord (1,3,5,7)      |
-
----
-
-### Opening Book (Bibliothèque d'ouvertures)
-
-Dictionnaire de coups prédéfinis pour les premières positions courantes, évitant l'appel à Minimax sur les états initiaux :
-
-```js
-const OPENING_BOOK = {
-  "000000000_1": [4], // plateau vide → toujours centre
-  "000010000_2": [0, 2, 6, 8], // humain a le centre → coin
-  "100000000_2": [4], // humain en coin → répondre centre
-  // ... 12 entrées au total
-};
-```
 
 ---
 
@@ -299,16 +318,17 @@ _(Mesurés sur Chrome, machine Core i5 — varient selon la position)_
 
 ## Structure du Projet
 
-```
-fanoron-telo/
-├── index.html          # Point d'entrée — structure HTML complète
-├── README.md           # Ce fichier (rapport de projet)
+```text
+Fanorona-Telo/
+├── index.html          # Interface principale et structure des écrans
+├── README.md           # Documentation du projet
 └── src/
-    ├── style.css       # Styles — thème malgache, animations, responsive
-    └── game.js         # Logique complète — plateau, règles, Minimax, UI
-```
+    ├── main.js         # Point d'entrée JavaScript et gestion des événements UI
+    ├── game.js         # Logique du jeu, moteur IA et gestion des états
+    └── style.css       # Styles, animations et interface responsive
 
 ---
 
 _Hackathon Algorithmique Avancée — 5 heures — Documents autorisés_
 _Institut Supérieur Polytechnique de Madagascar — [www.ispm-edu.com](https://www.ispm-edu.com)_
+```
