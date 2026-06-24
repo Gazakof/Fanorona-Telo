@@ -327,8 +327,4 @@ Fanorona-Telo/
     ├── game.js         # Logique du jeu, moteur IA et gestion des états
     └── style.css       # Styles, animations et interface responsive
 
----
-
-_Hackathon Algorithmique Avancée — 5 heures — Documents autorisés_
-_Institut Supérieur Polytechnique de Madagascar — [www.ispm-edu.com](https://www.ispm-edu.com)_
 ```
