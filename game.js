@@ -810,11 +810,11 @@ function showEndModal(winner) {
    8. GESTION DES ÉCRANS ET MODES
    ══════════════════════════════════════════════════════ */
 
-function showDifficultyMenu() {
+export function showDifficultyMenu() {
   document.getElementById("difficulty-menu").classList.remove("hidden");
 }
 
-function startGame(mode, difficulty = "medium") {
+export function startGame(mode, difficulty = "medium") {
   state = {
     board: Array(9).fill(EMPTY),
     phase: 1,
@@ -860,7 +860,7 @@ function startGame(mode, difficulty = "medium") {
   if (mode === "ava") setTimeout(scheduleAI, 900);
 }
 
-function undoMove() {
+export function undoMove() {
   if (!state.history.length || state.aiThinking) return;
   const prev = state.history.pop();
   Object.assign(state, { ...prev, gameOver: false, aiThinking: false });
@@ -871,12 +871,12 @@ function undoMove() {
   updateStatus();
 }
 
-function restartGame() {
+export function restartGame() {
   document.getElementById("modal-end").classList.add("hidden");
   startGame(state.mode, state.difficulty);
 }
 
-function goHome() {
+export function goHome() {
   state.gameOver = true;
   document.getElementById("modal-end").classList.add("hidden");
   switchScreen("screen-home");
@@ -894,9 +894,9 @@ function switchScreen(id) {
    ══════════════════════════════════════════════════════ */
 drawBoard();
 
-window.startGame = startGame;
-window.showDifficultyMenu = showDifficultyMenu;
-window.goHome = goHome;
-window.undoMove = undoMove;
-window.restartGame = restartGame;
-window.onCellClick = onCellClick;
+// window.startGame = startGame;
+// window.showDifficultyMenu = showDifficultyMenu;
+// window.goHome = goHome;
+// window.undoMove = undoMove;
+// window.restartGame = restartGame;
+// window.onCellClick = onCellClick;

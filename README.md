@@ -9,10 +9,10 @@
 | ------------------------------------- | ----------------- | ----------- | -------------------------------------- |
 | _RAKOTOARIVELO Anjaratiana Mendrika_  | _25_              | _IMTICIA 4_ | Lead AI / Minimax & Alpha-Beta         |
 | _RABEHARISAINA Mamy Fanojo_           | _22_              | _IMTICIA 4_ | Architecte du Moteur de Jeu            |
-| _ANDRIAMALALA RANJA Ken Andi _        | _13_              | _IMTICIA 4_ | Ingénieur Algorithmes et Optimisation  |
+| _ANDRIAMALALA RANJA Ken Andi_         | _13_              | _IMTICIA 4_ | Ingénieur Algorithmes et Optimisation  |
 | _ANDRIAMIHAJASON Ny Harentsoa Jorris_ | _01_              | _IMTICIA 4_ | Architecte Frontend                    |
 | _RALISAONA Fanomezana_                | _21_              | _IMTICIA 4_ | Designer UI/UX & Développeur Frontend  |
-| _RANDRIAMORASATA Ezra _               | _08_              | _IMTICIA 4_ | Responsable Intégration et Déploiement |
+| _RANDRIAMORASATA Ezra_                | _08_              | _IMTICIA 4_ | Responsable Intégration et Déploiement |
 
 ---
 
@@ -30,7 +30,7 @@
 | Priorité | Fonctionnalité                                                    | Statut |
 | -------- | ----------------------------------------------------------------- | ------ |
 | P1       | Mode Humain vs Humain                                             | ✅     |
-| P1       | Mode Humain vs IA (Facile / Moyen)                                | ✅     |
+| P1       | Mode Humain vs IA : Facile / Moyen                                | ✅     |
 | P1       | Règles robustes (Phase 1 + Phase 2, victoire, adjacences exactes) | ✅     |
 | P2       | IA Difficile avec Alpha-Beta pruning                              | ✅     |
 | P2       | Mode IA vs IA (démonstration)                                     | ✅     |
