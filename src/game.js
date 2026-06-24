@@ -1,23 +1,3 @@
-/**
- * FANORON-TELO — Moteur de jeu complet avec IA
- * ISPM Madagascar — Hackathon Algorithmique Avancée
- *
- * Plateau 3×3, indices 0..8 (gauche→droite, haut→bas) :
- *   0-1-2
- *   3-4-5
- *   6-7-8
- *
- * ── Algorithmes IA implémentés ──────────────────────
- *  • Minimax avec élagage Alpha-Beta (Section 5)
- *  • Iterative Deepening (Section 5)
- *  • Table de transposition avec flags exact/lower/upper (Section 5)
- *  • Move ordering (killer move heuristic) pour accélérer l'élagage
- *  • Opening book (bibliothèque de coups d'ouverture prédéfinis) (Section 5)
- *  • Heuristique d'évaluation multi-critères (Section 5)
- *  • Détection de match nul par blocage (Phase 2)
- *  • Métriques complètes : temps, nœuds, profondeur atteinte (Section 6)
- */
-
 "use strict";
 
 /* ══════════════════════════════════════════════════════
