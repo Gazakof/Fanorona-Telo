@@ -1,19 +1,18 @@
 # Fanoron-telo avec Intelligence Artificielle
 
-> [Institut Supérieur Polytechnique de Madagascar](https://www.ispm-edu.com) — Travaux Pratiques Algorithmique Avancée
-
----
-
 ## Section 1 : En-tête Institutionnel et Identification
 
 - **Institution :** [Institut Supérieur Polytechnique de Madagascar (ISPM)](https://www.ispm-edu.com)
-- **Groupe de projet :** Groupe Hackathon Algorithmique Avancée 2025
+- **Groupe de projet :** GotTech
 
-| Nom Complet | Numéro d'étudiant | Classe | Rôle précis pour ce Hackathon |
-|-------------|-------------------|--------|-------------------------------|
-| ** | *(à compléter)* | *(à compléter)* | Lead AI / Minimax & Alpha-Beta |
-| *RALISAONA Fanomezana* | *21* | *IMTICIA 4* | Frontend / UI-UX Designer |
-| *RABEHARISAINA Mamy Fanojo* | *(à compléter)* | *(à compléter)* | Backend Architect / DevOps |
+| Nom Complet                           | Numéro d'étudiant | Classe      | Rôle précis pour ce Hackathon          |
+| ------------------------------------- | ----------------- | ----------- | -------------------------------------- |
+| _RAKOTOARIVELO Anjaratiana Mendrika_  | _25_              | _IMTICIA 4_ | Lead AI / Minimax & Alpha-Beta         |
+| _RABEHARISAINA Mamy Fanojo_           | _22_              | _IMTICIA 4_ | Architecte du Moteur de Jeu            |
+| _ANDRIAMALALA RANJA Ken Andi _        | _13_              | _IMTICIA 4_ | Ingénieur Algorithmes et Optimisation  |
+| _ANDRIAMIHAJASON Ny Harentsoa Jorris_ | _01_              | _IMTICIA 4_ | Architecte Frontend                    |
+| _RALISAONA Fanomezana_                | _21_              | _IMTICIA 4_ | Designer UI/UX & Développeur Frontend  |
+| _RANDRIAMORASATA Ezra _               | _08_              | _IMTICIA 4_ | Responsable Intégration et Déploiement |
 
 ---
 
@@ -28,18 +27,18 @@
 
 ### Fonctionnalités implémentées
 
-| Priorité | Fonctionnalité | Statut |
-|----------|---------------|--------|
-| P1 | Mode Humain vs Humain | ✅ |
-| P1 | Mode Humain vs IA (Facile / Moyen) | ✅ |
-| P1 | Règles robustes (Phase 1 + Phase 2, victoire, adjacences exactes) | ✅ |
-| P2 | IA Difficile avec Alpha-Beta pruning | ✅ |
-| P2 | Mode IA vs IA (démonstration) | ✅ |
-| P3 | Option Undo/Redo | ✅ |
-| P3 | Animations & design soigné | ✅ |
-| Bonus | Table de transposition (Zobrist-like) | ✅ |
-| Bonus | Opening book | ✅ |
-| Bonus | Métriques de performance (temps, nœuds évalués) | ✅ |
+| Priorité | Fonctionnalité                                                    | Statut |
+| -------- | ----------------------------------------------------------------- | ------ |
+| P1       | Mode Humain vs Humain                                             | ✅     |
+| P1       | Mode Humain vs IA (Facile / Moyen)                                | ✅     |
+| P1       | Règles robustes (Phase 1 + Phase 2, victoire, adjacences exactes) | ✅     |
+| P2       | IA Difficile avec Alpha-Beta pruning                              | ✅     |
+| P2       | Mode IA vs IA (démonstration)                                     | ✅     |
+| P3       | Option Undo/Redo                                                  | ✅     |
+| P3       | Animations & design soigné                                        | ✅     |
+| Bonus    | Table de transposition (Zobrist-like)                             | ✅     |
+| Bonus    | Opening book                                                      | ✅     |
+| Bonus    | Métriques de performance (temps, nœuds évalués)                   | ✅     |
 
 ### Pile technologique
 
@@ -91,21 +90,33 @@ Le plateau 3×3 est représenté par un **tableau de 9 entiers** (indices 0–8,
 ```
 
 Chaque cellule vaut `0` (vide), `1` (Joueur 1 / Noir) ou `2` (Joueur 2 / Blanc). Ce format permet :
+
 - Accès O(1) à toute case
 - Copie d'état en O(n) par `board.slice()` pour l'arbre Minimax
 - Vérification des 8 lignes gagnantes par lookup constant
 
 ```js
 const WIN_LINES = [
-  [0,1,2], [3,4,5], [6,7,8],   // horizontales
-  [0,3,6], [1,4,7], [2,5,8],   // verticales
-  [0,4,8], [2,4,6]             // diagonales
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8], // horizontales
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8], // verticales
+  [0, 4, 8],
+  [2, 4, 6], // diagonales
 ];
 
 const ADJACENCY = [
-  [1,3,4], [0,2,3,4,5], [1,4,5],
-  [0,1,4,6,7], [0,1,2,3,5,6,7,8], [1,2,4,7,8],
-  [3,4,7],     [3,4,5,6,8],        [4,5,7]
+  [1, 3, 4],
+  [0, 2, 3, 4, 5],
+  [1, 4, 5],
+  [0, 1, 4, 6, 7],
+  [0, 1, 2, 3, 5, 6, 7, 8],
+  [1, 2, 4, 7, 8],
+  [3, 4, 7],
+  [3, 4, 5, 6, 8],
+  [4, 5, 7],
 ];
 // Case 4 (centre) = 8 voisins → position la plus stratégique
 ```
@@ -128,9 +139,16 @@ function minimax(st, depth, alpha, beta, maximizing, aiPlayer) {
   if (depth === 0) return evaluate(st.board, aiPlayer, st.phase);
 
   for (const move of getLegalMoves(st)) {
-    const val = minimax(applyMove(st, move), depth-1, alpha, beta, !maximizing, aiPlayer);
+    const val = minimax(
+      applyMove(st, move),
+      depth - 1,
+      alpha,
+      beta,
+      !maximizing,
+      aiPlayer,
+    );
     if (maximizing) alpha = Math.max(alpha, val);
-    else            beta  = Math.min(beta, val);
+    else beta = Math.min(beta, val);
     if (alpha >= beta) break; // ÉLAGAGE Alpha-Beta
   }
   return maximizing ? alpha : beta;
@@ -142,9 +160,10 @@ function minimax(st, depth, alpha, beta, maximizing, aiPlayer) {
 ### Table de Transposition (avec flags exact/lower/upper)
 
 Chaque état `(board + phase + turn)` est mémorisé dans une `Map` avec :
-- `flag = TT_EXACT`  → valeur exacte connue
-- `flag = TT_LOWER`  → borne inférieure (alpha cutoff)
-- `flag = TT_UPPER`  → borne supérieure (beta cutoff)
+
+- `flag = TT_EXACT` → valeur exacte connue
+- `flag = TT_LOWER` → borne inférieure (alpha cutoff)
+- `flag = TT_UPPER` → borne supérieure (beta cutoff)
 - `depth` → profondeur à laquelle cet état a été évalué
 
 ```js
@@ -152,7 +171,7 @@ const entry = _tt.get(key);
 if (entry && entry.depth >= depth) {
   if (entry.flag === TT_EXACT) return entry.value;
   if (entry.flag === TT_LOWER) alpha = Math.max(alpha, entry.value);
-  if (entry.flag === TT_UPPER) beta  = Math.min(beta,  entry.value);
+  if (entry.flag === TT_UPPER) beta = Math.min(beta, entry.value);
   if (alpha >= beta) return entry.value; // cutoff immédiat
 }
 ```
@@ -172,6 +191,7 @@ depth=maxDepth ou timeout → retourner le meilleur coup trouvé
 ```
 
 **Avantages :**
+
 - Toujours un coup disponible même en cas de timeout
 - Les résultats des itérations précédentes améliorent le Move Ordering
 - Profondeur effective adaptative selon la complexité de la position
@@ -184,13 +204,13 @@ Limites de temps : Facile=200ms, Moyen=600ms, Difficile=1500ms
 
 Pour maximiser l'efficacité de l'élagage Alpha-Beta, les coups sont triés avant la récursion :
 
-| Priorité | Critère |
-|----------|---------|
-| 1000 | Coup gagnant immédiat pour l'IA |
-| 500  | Coup qui bloque une victoire adverse |
-| 10   | Placement au centre (case 4) |
-| 5    | Placement dans un coin (0,2,6,8) |
-| 2    | Placement sur un bord (1,3,5,7) |
+| Priorité | Critère                              |
+| -------- | ------------------------------------ |
+| 1000     | Coup gagnant immédiat pour l'IA      |
+| 500      | Coup qui bloque une victoire adverse |
+| 10       | Placement au centre (case 4)         |
+| 5        | Placement dans un coin (0,2,6,8)     |
+| 2        | Placement sur un bord (1,3,5,7)      |
 
 ---
 
@@ -200,9 +220,9 @@ Dictionnaire de coups prédéfinis pour les premières positions courantes, évi
 
 ```js
 const OPENING_BOOK = {
-  '000000000_1': [4],          // plateau vide → toujours centre
-  '000010000_2': [0,2,6,8],    // humain a le centre → coin
-  '100000000_2': [4],          // humain en coin → répondre centre
+  "000000000_1": [4], // plateau vide → toujours centre
+  "000010000_2": [0, 2, 6, 8], // humain a le centre → coin
+  "100000000_2": [4], // humain en coin → répondre centre
   // ... 12 entrées au total
 };
 ```
@@ -228,6 +248,7 @@ Score = Σ (sur les 8 lignes gagnantes) :
 ### IA Facile (sans Minimax profond)
 
 L'IA Facile utilise une heuristique légère à un seul coup d'avance :
+
 1. Victoire immédiate si possible
 2. Bloquer une victoire adverse
 3. Jouer le centre, puis un coin, puis un bord
@@ -241,21 +262,21 @@ Les métriques suivantes sont **affichées en temps réel** dans l'interface apr
 
 ### Temps de réponse moyen
 
-| Niveau | Profondeur effective | Temps Phase 1 | Temps Phase 2 |
-|--------|---------------------|---------------|---------------|
-| Facile | 1 (heuristique)    | < 1 ms        | < 1 ms        |
-| Moyen  | 3–4                | ~5–20 ms      | ~20–80 ms     |
-| Difficile | 6–9 (ID + TT)   | ~50–200 ms    | ~100–800 ms   |
+| Niveau    | Profondeur effective | Temps Phase 1 | Temps Phase 2 |
+| --------- | -------------------- | ------------- | ------------- |
+| Facile    | 1 (heuristique)      | < 1 ms        | < 1 ms        |
+| Moyen     | 3–4                  | ~5–20 ms      | ~20–80 ms     |
+| Difficile | 6–9 (ID + TT)        | ~50–200 ms    | ~100–800 ms   |
 
-*(Mesurés sur Chrome, machine Core i5 — varient selon la position)*
+_(Mesurés sur Chrome, machine Core i5 — varient selon la position)_
 
 ### Impact de la Table de Transposition
 
-| Position | Nœuds sans TT | Nœuds avec TT | Réduction |
-|----------|--------------|---------------|-----------|
-| Profondeur 4, Phase 1 | ~5 000 | ~800 | **84%** |
-| Profondeur 6, Phase 2 | ~40 000 | ~3 000 | **92%** |
-| Profondeur 9, Phase 2 | ~200 000 | ~12 000 | **94%** |
+| Position              | Nœuds sans TT | Nœuds avec TT | Réduction |
+| --------------------- | ------------- | ------------- | --------- |
+| Profondeur 4, Phase 1 | ~5 000        | ~800          | **84%**   |
+| Profondeur 6, Phase 2 | ~40 000       | ~3 000        | **92%**   |
+| Profondeur 9, Phase 2 | ~200 000      | ~12 000       | **94%**   |
 
 ### Résultats IA vs IA (mode Démo — Difficile vs Difficile)
 
@@ -266,13 +287,13 @@ Les métriques suivantes sont **affichées en temps réel** dans l'interface apr
 
 ### Métriques affichées dans l'interface (après chaque coup IA)
 
-| Métrique | Description |
-|----------|-------------|
-| ⏱ Temps | Durée de calcul en millisecondes |
-| 🔍 Nœuds | Nombre total de nœuds Minimax évalués |
-| 📏 Profondeur | Profondeur effective atteinte (Iterative Deepening) |
-| 💾 Hits TT | Nombre de lectures fructueuses dans la table de transposition |
-| ✂️ Coupures α-β | Nombre de branches élaguées par Alpha-Beta |
+| Métrique        | Description                                                   |
+| --------------- | ------------------------------------------------------------- |
+| ⏱ Temps         | Durée de calcul en millisecondes                              |
+| 🔍 Nœuds        | Nombre total de nœuds Minimax évalués                         |
+| 📏 Profondeur   | Profondeur effective atteinte (Iterative Deepening)           |
+| 💾 Hits TT      | Nombre de lectures fructueuses dans la table de transposition |
+| ✂️ Coupures α-β | Nombre de branches élaguées par Alpha-Beta                    |
 
 ---
 
@@ -289,5 +310,5 @@ fanoron-telo/
 
 ---
 
-*Hackathon Algorithmique Avancée — 5 heures — Documents autorisés*
-*Institut Supérieur Polytechnique de Madagascar — [www.ispm-edu.com](https://www.ispm-edu.com)*
+_Hackathon Algorithmique Avancée — 5 heures — Documents autorisés_
+_Institut Supérieur Polytechnique de Madagascar — [www.ispm-edu.com](https://www.ispm-edu.com)_
