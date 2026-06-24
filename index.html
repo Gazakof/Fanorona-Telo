@@ -43,16 +43,15 @@
         <div id="difficulty-menu" class="difficulty-menu hidden">
           <h3>Niveau de difficulté</h3>
           <div class="diff-buttons">
-            <button class="diff-btn easy" onclick="startGame('hva', 'easy')">
-              Facile
-            </button>
-            <button
+            <!-- <button class="diff-btn easy" onclick="startGame('hva', 'easy')"> -->
+            <button class="diff-btn easy" id="btnSGFacile">Facile</button>
+            <!-- <button
               class="diff-btn medium"
               onclick="startGame('hva', 'medium')"
-            >
-              Moyen
-            </button>
-            <button class="diff-btn hard" onclick="startGame('hva', 'hard')">
+            > -->
+            <button class="diff-btn medium" id="btnSGMoyen">Moyen</button>
+            <!-- <button class="diff-btn hard" onclick="startGame('hva', 'hard')"> -->
+            <button class="diff-btn hard" id="btnSGFDifficile">
               Difficile
             </button>
           </div>
@@ -68,11 +67,11 @@
     <!-- ÉCRAN DE JEU -->
     <div id="screen-game" class="screen">
       <div class="game-topbar">
-        <button class="btn-back" onclick="goHome()">← Menu</button>
+        <!-- <button class="btn-back" onclick="goHome()"> -->
+        <button class="btn-back" id="btnGoHome">← Menu</button>
         <div id="game-title" class="game-title">Fanoron-telo</div>
-        <button class="btn-undo" id="btn-undo" onclick="undoMove()" disabled>
-          ↩ Annuler
-        </button>
+        <!-- <button class="btn-undo" id="btn-undo" onclick="undoMove()" disabled> -->
+        <button class="btn-undo" id="btn-undo" disabled>↩ Annuler</button>
       </div>
 
       <div class="game-area">
@@ -112,9 +111,8 @@
 
         <!-- Contrôles -->
         <div class="game-controls">
-          <button class="btn-restart" onclick="restartGame()">
-            ⟳ Recommencer
-          </button>
+          <!-- <button class="btn-restart" onclick="restartGame()"> -->
+          <button class="btn-restart" id="btnRestart">⟳ Recommencer</button>
         </div>
 
         <!-- Stats IA — Section 6 : Analyses de Performances -->
@@ -153,13 +151,13 @@
         <h2 id="modal-title">Partie terminée</h2>
         <p id="modal-msg"></p>
         <div class="modal-btns">
-          <button onclick="restartGame()">Rejouer</button>
-          <button onclick="goHome()">Menu principal</button>
+          <button id="modalBtnRestart">Rejouer</button>
+          <button id="modalBtnGoHome">Menu principal</button>
         </div>
       </div>
     </div>
 
-    <script type="module" src="./main.js"></script>
+    <script type="module" src="src/main.js"></script>
     <!-- <script type="module" src="/src/main.js"></script> -->
   </body>
 </html>
