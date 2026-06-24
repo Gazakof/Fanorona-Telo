@@ -33,7 +33,7 @@
 | P1       | Mode Humain vs Humain                                             | ✅     |
 | P1       | Mode Humain vs IA : Facile / Moyen                                | ✅     |
 | P1       | Règles robustes (Phase 1 + Phase 2, victoire, adjacences exactes) | ✅     |
-| P2       | IA Difficile avec Alpha-Beta pruning                              | ✅     |
+| P2       | Mode Humain vs IA : Difficile avec Alpha-Beta pruning             | ✅     |
 | P2       | Mode IA vs IA (démonstration)                                     | ✅     |
 | P3       | Option Undo/Redo                                                  | ✅     |
 | P3       | Animations & design soigné                                        | ✅     |
