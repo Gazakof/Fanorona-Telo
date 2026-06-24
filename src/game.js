@@ -830,11 +830,11 @@ function showEndModal(winner) {
    8. GESTION DES ÉCRANS ET MODES
    ══════════════════════════════════════════════════════ */
 
-window.showDifficultyMenu = function () {
+function showDifficultyMenu() {
   document.getElementById("difficulty-menu").classList.remove("hidden");
-};
+}
 
-window.startGame = function (mode, difficulty = "medium") {
+function startGame(mode, difficulty = "medium") {
   state = {
     board: Array(9).fill(EMPTY),
     phase: 1,
@@ -878,7 +878,7 @@ window.startGame = function (mode, difficulty = "medium") {
   updateStatus();
 
   if (mode === "ava") setTimeout(scheduleAI, 900);
-};
+}
 
 function undoMove() {
   if (!state.history.length || state.aiThinking) return;
@@ -913,3 +913,10 @@ function switchScreen(id) {
    9. INIT
    ══════════════════════════════════════════════════════ */
 drawBoard();
+
+window.startGame = startGame;
+window.showDifficultyMenu = showDifficultyMenu;
+window.goHome = goHome;
+window.undoMove = undoMove;
+window.restartGame = restartGame;
+window.onCellClick = onCellClick;
